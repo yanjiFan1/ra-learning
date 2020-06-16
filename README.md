@@ -68,9 +68,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
+### 疑惑
+1. react-router和react-router-dom的区别 https://www.cnblogs.com/laneyfu/p/11264923.html
+2. 
+
 ### 使用技术(参考)
 
 1. antd https://ant.design/
 2. react-router http://react-guide.github.io/react-router-cn/
 3. react https://react.docschina.org/
-5. react-router5.x引入 https://www.cnblogs.com/cckui/p/11490372.html
+4. react-router5.x引入 https://www.cnblogs.com/cckui/p/11490372.html
+5. react-router-config https://segmentfault.com/a/1190000015282620
