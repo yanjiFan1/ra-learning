@@ -79,3 +79,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 3. react https://react.docschina.org/
 4. react-router5.x引入 https://www.cnblogs.com/cckui/p/11490372.html
 5. react-router-config https://segmentfault.com/a/1190000015282620
+6. webpack https://www.webpackjs.com/
+
+### 打包和服务
+
+1. craco
+2. webpack 目前是这个

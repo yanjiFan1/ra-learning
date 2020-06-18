@@ -1,0 +1,17 @@
+/*.babelrc是Babel的配置文件，放在项目根目录下，使用Babel的第一步就是配置这个文件*/
+/*参考： https://www.jianshu.com/p/cfc96aebafb6*/
+{
+  "presets": [
+	  "@babel/preset-env",
+	  "@babel/preset-react"
+  ],
+  "plugins": [
+  	[
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ]
+  ]
+}	
