@@ -4,7 +4,9 @@ import { ConfigProvider } from 'antd';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
 ReactDOM.render(
 	<ConfigProvider>
   	<App />

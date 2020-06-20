@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'public/index.html',
+      template: './public/index.html',
       inject: true
     })
   ],
@@ -32,6 +32,38 @@ module.exports = {
           }
         }
       },
+      // {
+      //   exclude: [
+      //     /\.html$/,
+      //     /\.(js|jsx)$/,
+      //     /\.less$/,
+      //     /\.css$/,
+      //     /\.json$/,
+      //     /\.bmp$/,
+      //     /\.gif$/,
+      //     /\.jpe?g$/,
+      //     /\.png$/,
+      //   ],
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: 'static/media/[name].[hash:8].[ext]',
+      //   },
+      // },
+      // {
+      //   test: /\.(css|less)$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader',
+      //     'less-loader'
+      //   ]
+      // },
+      // {
+
+      //   test: /\.(png|svg|jpe?g|gif)$/,
+      //   use: [
+      //     'file-loader'
+      //   ]
+      // },
       {
         test: /\.(css|less)$/,
         // exclude: /node_modules/,
@@ -51,6 +83,7 @@ module.exports = {
       },
       {
         test: /\.(woff|eot|ttf|svg|gif)$/,
+        exclude: /node_modules/,
         loader: 'url-loader',
         options: {
           limit: 8192,
@@ -62,7 +95,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      '@': path.join(__dirname, '../src'),
+      // '@': path.join(__dirname, '../src'),
     },
   },
 };

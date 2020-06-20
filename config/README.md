@@ -18,6 +18,15 @@ node-sass --save-dev
 style-loader --save-dev
 css-loader --save-dev
 
+解析图片等文件
+url-loader
+
+加载图片 file-loader
+假想现在我们正在下载 CSS，但是我们的背景和图标这些图片，要如何处理呢？使用 file-loader，我们可以轻松地将这些内容混合到 CSS中
+
+参考： https://www.webpackjs.com/guides/asset-management/#loading-css
+
+
 3. 解析react jsx
 react --save 
 react-dom --save
@@ -97,7 +106,9 @@ babel-loader 的作用正是实现对使用了ES2015+语法的.js文件进行处
 13. 
 babel-plugin-transform-class-properties
 
+14. 
 
+html-loader 解析html模版
 
 参考： 
 
@@ -106,4 +117,5 @@ https://www.jianshu.com/p/ce28ceddda72
 
 
 #######搭建过程中遇到的问题######
-1. 
+1. 解析react如何引入babel
+npm i babel-loader babel-core babel-preset-env babel-preset-react --save-dev
