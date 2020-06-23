@@ -4,10 +4,12 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
+import { Layout } from 'antd';
+const { Footer } = Layout
 export default class GlobalFooter extends Component {
 	render() {
-        return (
-            <div>底部</div>
-        )
-    }
+    return (
+		  <Footer style={{ textAlign: 'center' }}>Ant Design © 1997-{new Date().getFullYear()} Created by YanJi</Footer>
+    )
+  }
 }

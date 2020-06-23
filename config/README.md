@@ -106,9 +106,7 @@ babel-loader 的作用正是实现对使用了ES2015+语法的.js文件进行处
 13. 
 babel-plugin-transform-class-properties
 
-14. 
-
-html-loader 解析html模版
+14. html-loader 解析html模版
 
 参考： 
 
@@ -116,6 +114,15 @@ https://www.jianshu.com/p/ce28ceddda72
 
 
 
+
+#### 重要优化模块 #####
+1. webpack4 的热加载 https://www.jianshu.com/p/893058b6b17f
+
+
+
+
 #######搭建过程中遇到的问题######
 1. 解析react如何引入babel
 npm i babel-loader babel-core babel-preset-env babel-preset-react --save-dev
+
+2. 警告入口点大小限制：以下入口点的组合资产大小超过了建议的限制（244 KiB）。 这可能会影响网络性能。

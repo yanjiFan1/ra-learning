@@ -13,7 +13,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
-    "webpack": "webpack --watch --progress --color config/webpack.dev.js"
+    "build1": "webpack --mode production",
+    "webpack": "webpack --config --progress --color config/webpack.dev.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.1",
     "babel-loader": "^8.1.0",

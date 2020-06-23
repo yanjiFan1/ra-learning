@@ -5,13 +5,21 @@
 */
 import React, { Component } from 'react';
 import { Layout } from 'antd';
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined
+} from '@ant-design/icons';
 const { Header } = Layout
 export default class GlobalHeader extends Component {
 	render() {
-        return (
-            <Header className="m-layout-header" style={{ padding: 0 }}>
-            	我是头部呢
-            </Header>
-        )
-    }
+		const { collapsed, onSwitchCollapsed } = this.props
+    return (
+      <Header className="site-layout-background" style={{ padding: 0 }}>
+	      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+	        className: 'trigger',
+	        onClick: onSwitchCollapsed,
+	      })}
+	    </Header>
+    )
+  }
 }

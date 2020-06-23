@@ -9,8 +9,9 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
-    filename: '[name].bundle.js',
-    path: resolve(__dirname, 'dist')
+    filename: '[name].[hash].js',
+    path: path.join(__dirname + '/dist'),
+    publicPath: '/'
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -66,8 +67,7 @@ module.exports = {
       // },
       {
         test: /\.(css|less)$/,
-        // exclude: /node_modules/,
-        loaders:['style-loader', 'css-loader', 'less-loader'],
+        loaders:['style-loader', 'css-loader', 'less-loader']
         // exclude: /node_modules/,
         // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
       },
