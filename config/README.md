@@ -118,6 +118,10 @@ https://www.jianshu.com/p/ce28ceddda72
 #### 重要优化模块 #####
 1. webpack4 的热加载 https://www.jianshu.com/p/893058b6b17f
 
+2. react-hot-loader 
+	2.1 https://www.jianshu.com/p/244e1ffe7501
+	2.2 https://blog.csdn.net/csm0912/article/details/87069764
+
 
 
 

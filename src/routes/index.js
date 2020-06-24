@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import { Switch, Route, Router, Redirect } from 'react-router'
 import Login from '../view/login/Login'
 import Dashboard from '../view/dashboard/Dashboard'
+import Home from '../view/home/Home'
+import Shop from '../view/shop/Shop'
 
 // const Dashboard = React.createClass({
 //   render() {
@@ -71,6 +73,16 @@ const routes = [
         path: "/dashboard/:id",
         exact: true,
         component: Dashboard
+      },
+      {
+        path: "/home",
+        exact: true,
+        component: Home
+      },
+      {
+        path: "/shop",
+        exact: true,
+        component: Shop
       },
       {
         /*

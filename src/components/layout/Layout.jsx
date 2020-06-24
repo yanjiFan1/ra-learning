@@ -25,7 +25,9 @@ export default class GlobalLayout extends Component {
   };
 
 	render() {
-		const { collapsed } = this.state 
+		const { collapsed } = this.state
+		console.log(1111);
+		console.log(2222);
     return (
       <Layout className="g-layout">
 		    <GlobalSideBar collapsed={collapsed} />

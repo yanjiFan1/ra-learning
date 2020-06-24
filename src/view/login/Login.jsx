@@ -2,7 +2,7 @@ import React from 'react';
 export default class Login extends React.Component {
 	render() {
         return (
-            <div>12323</div>
+            <div>登录页面</div>
         )
     }
 }
