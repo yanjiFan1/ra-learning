@@ -53,8 +53,8 @@ import Shop from '../view/shop/Shop'
 
 // export default <Router routes={routeConfig} />
 
-import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
-import { matchRoutes, renderRoutes } from "react-router-config";
+import { Route, BrowserRouter, HashRouter, Redirect, Switch } from 'react-router-dom'
+import { matchRoutes, renderRoutes } from "./react-router-config/index.js";
 const routes = [
   {
     component: Login,
@@ -70,7 +70,7 @@ const routes = [
         component: Login
       },
       {
-        path: "/dashboard/:id",
+        path: "/dashboard",
         exact: true,
         component: Dashboard
       },
@@ -99,20 +99,17 @@ const routes = [
     ]
   }
 ];
-export default () => (
-  <BrowserRouter>
-    {/* kick it all off with the root route */}
-    {renderRoutes(routes)}
-    {
-      /*
-      <Switch>
-        <Redirect exact from='/' to='/login' />
-        <Route path='/' exact component={Login}></Route>
-        <Route path='/login' exact component={Login}></Route>
-        <Route path='/dashboard/:id' exact component={Dashboard}></Route>
-        <Route render={() => <div>Not Found</div>} />
-      </Switch>
-      */
-    }
-  </BrowserRouter>
-)
+
+class ARouter extends Component {
+  render() {
+    return(<HashRouter>{renderRoutes(routes[0].routes)}</HashRouter>)
+  }
+}
+
+export default ARouter;
+
+// export default () => (
+//   <BrowserRouter>
+//     {renderRoutes(routes)}
+//   </BrowserRouter>
+// )

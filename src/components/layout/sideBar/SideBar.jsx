@@ -4,7 +4,7 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
-import { BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Link, NavLink } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
@@ -24,22 +24,22 @@ export default class GlobalSideBar extends Component {
 			key: '1',
 			icon: <UserOutlined />,
 			title: '1',
-			path: '#/dashboard'
+			path: '/dashboard'
 		},{
 			key: '2',
 			icon: <VideoCameraOutlined />,
 			title: '2',
-			path: '#/login'
+			path: '/login'
 		},{
 			key: '3',
 			icon: <UploadOutlined />,
 			title: '3',
-			path: '#/home'
+			path: '/home'
 		},{
 			key: '4',
 			icon: <UploadOutlined />,
 			title: '4',
-			path: '#/shop'
+			path: '/shop'
 		}]
     return (
       <Sider 
@@ -56,7 +56,7 @@ export default class GlobalSideBar extends Component {
         	{
         		MenuList.map(item => 
         			<Menu.Item key={item.key} icon={item.icon}>
-        				<BrowserRouter><Link to={item.path}>{item.title}</Link></BrowserRouter>
+        				<HashRouter><Link to={item.path}>{item.title}</Link></HashRouter>
 	            </Menu.Item>
         		)
         	}
