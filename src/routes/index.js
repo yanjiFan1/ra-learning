@@ -85,16 +85,15 @@ const routes = [
         component: Shop
       },
       {
-        /*
         path: "/child/:id",
-        component: Child,
+        component: Home,
         routes: [
           {
             path: "/child/:id/grand-child",
-            component: GrandChild
+            component: Home
           }
         ]
-        */
+        
       }
     ]
   }
@@ -102,7 +101,7 @@ const routes = [
 
 class ARouter extends Component {
   render() {
-    return(<HashRouter>{renderRoutes(routes[0].routes)}</HashRouter>)
+    return(<div>{renderRoutes(routes[0].routes)}</div>)
   }
 }
 

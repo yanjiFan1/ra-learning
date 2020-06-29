@@ -4,7 +4,7 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
-import { BrowserRouter, HashRouter, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Link, NavLink, withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
@@ -13,12 +13,13 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
+import './sideBar.less'
 const { Sider } = Layout;
-console.log(111)
-console.log(222)
-export default class GlobalSideBar extends Component {
+class GlobalSideBar extends Component {
+	constructor(props){
+    super(props);
+  }
 	render() {
-		
 		const { collapsed } = this.props
 		const MenuList = [{
 			key: '1',
@@ -40,6 +41,11 @@ export default class GlobalSideBar extends Component {
 			icon: <UploadOutlined />,
 			title: '4',
 			path: '/shop'
+		},{
+			key: '5',
+			icon: <UploadOutlined />,
+			title: '5',
+			path: '/child/1/grand-child'
 		}]
     return (
       <Sider 
@@ -56,7 +62,10 @@ export default class GlobalSideBar extends Component {
         	{
         		MenuList.map(item => 
         			<Menu.Item key={item.key} icon={item.icon}>
-        				<HashRouter><Link to={item.path}>{item.title}</Link></HashRouter>
+        				<HashRouter>
+        					{/*<Link to={item.path}>{item.title}</Link>*/}
+        					<NavLink className="menu-link" activeStyle={{color: 'red', background: 'blue'}} to={item.path}>{item.title}</NavLink>
+        				</HashRouter>
 	            </Menu.Item>
         		)
         	}
@@ -65,3 +74,4 @@ export default class GlobalSideBar extends Component {
     )
     }
 }
+export default withRouter(GlobalSideBar);
