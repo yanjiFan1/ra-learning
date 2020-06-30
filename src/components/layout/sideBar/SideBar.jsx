@@ -4,8 +4,10 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
-import { BrowserRouter, HashRouter, Link, NavLink, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import { menus } from './menus.js';
+import SiderMenu from './components/SiderMenu';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -18,35 +20,70 @@ const { Sider } = Layout;
 class GlobalSideBar extends Component {
 	constructor(props){
     super(props);
+    this.menus = menus
   }
+
+  state = {
+    mode: 'inline',
+    openKey: '',
+    selectedKey: '',
+    firstHide: true,        // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+  }
+
+  componentDidMount() {
+    this.setMenuOpen(this.props);
+  }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  // 	const { collapsed } = nextProps;
+  //   // 当传入的collapsed发生变化的时候，更新state
+  //   if (collapsed !== prevState.collapsed) {
+  //     return {
+  //       collapsed
+  //     }
+  //   }
+  //   // 否则，对于state不进行任何操作
+  //   return null;
+  // 	// this.onCollapse(props.collapsed);
+  //   // this.setMenuOpen(props)
+  // }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onCollapse(nextProps.collapsed);
+    this.setMenuOpen(nextProps)
+  }
+
+  setMenuOpen = props => {
+    const { pathname } = props.location;
+    this.setState({
+      openKey: pathname.substr(0, pathname.lastIndexOf('/')),
+      selectedKey: pathname
+    });
+  }
+  
+  onCollapse = (collapsed) => {
+    this.setState({
+      collapsed,
+      firstHide: collapsed,
+      mode: collapsed ? 'vertical' : 'inline',
+    });
+  }
+
+  menuClick = e => {
+    this.setState({
+      selectedKey: e.key
+    })
+  }
+
+  openMenu = v => {
+    this.setState({
+      openKey: v[v.length - 1],
+      firstHide: false,
+    })
+  }
+
 	render() {
 		const { collapsed } = this.props
-		const MenuList = [{
-			key: '1',
-			icon: <UserOutlined />,
-			title: '1',
-			path: '/dashboard'
-		},{
-			key: '2',
-			icon: <VideoCameraOutlined />,
-			title: '2',
-			path: '/login'
-		},{
-			key: '3',
-			icon: <UploadOutlined />,
-			title: '3',
-			path: '/home'
-		},{
-			key: '4',
-			icon: <UploadOutlined />,
-			title: '4',
-			path: '/shop'
-		},{
-			key: '5',
-			icon: <UploadOutlined />,
-			title: '5',
-			path: '/child/1/grand-child'
-		}]
     return (
       <Sider 
 		    style={{
@@ -54,22 +91,19 @@ class GlobalSideBar extends Component {
 	        height: '100vh',
 	      }} 
 	      trigger={null} 
-	      collapsible 
+	      collapsible
 	      collapsed={collapsed}
-	     >
+	    >
         <div className="logo">烟祭</div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-        	{
-        		MenuList.map(item => 
-        			<Menu.Item key={item.key} icon={item.icon}>
-        				<HashRouter>
-        					{/*<Link to={item.path}>{item.title}</Link>*/}
-        					<NavLink className="menu-link" activeStyle={{color: 'red', background: 'blue'}} to={item.path}>{item.title}</NavLink>
-        				</HashRouter>
-	            </Menu.Item>
-        		)
-        	}
-        </Menu>
+        <SiderMenu
+          menus={ this.menus }
+          onClick={this.menuClick}
+          theme="light"
+          mode="inline"
+          selectedKeys={[this.state.selectedKey]}
+          openKeys={this.state.firstHide ? null : [this.state.openKey]}
+          onOpenChange={this.openMenu}
+        />
       </Sider>
     )
     }
