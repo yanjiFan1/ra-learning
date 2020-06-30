@@ -9,9 +9,6 @@ const iconStyle={
 
 const renderMenuItem =
   ({ id, name, frontIcon, fronType, path, ...props })=> {
-  	console.log('renderMenuItem start')
-  	console.log(path)
-  	console.log('renderMenuItem end')
     return (
       <Menu.Item
         key={path}
@@ -27,9 +24,6 @@ const renderMenuItem =
 
 const renderSubMenu =
   ({ id, name, frontIcon, fronType, path, sub, ...props }) =>{
-  	console.log('renderSubMenu start')
-  	console.log(path)
-  	console.log('renderSubMenu end')
     return (
       <Menu.SubMenu
         key={path}

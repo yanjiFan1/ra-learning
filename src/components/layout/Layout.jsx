@@ -4,7 +4,10 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
+import Routes from '../../routes/index'
+import { renderRoutes } from "../../routes/react-router-config/index.js";
 
 import GlobalHeader from './header/Header'
 import GlobalFooter from './footer/Footer'
@@ -12,7 +15,11 @@ import GlobalContent from './content/Content'
 import GlobalSideBar from './sideBar/SideBar'
 import './layout.less'
 
-export default class GlobalLayout extends Component {
+class GlobalLayout extends Component {
+	constructor(props){
+    super(props)
+  }
+  
 	state = {
 		collapsed: 0
 	}
@@ -26,8 +33,6 @@ export default class GlobalLayout extends Component {
 
 	render() {
 		const { collapsed } = this.state
-		console.log(1111);
-		console.log(2222);
     return (
       <Layout className="g-layout">
 		    <GlobalSideBar collapsed={collapsed} />
@@ -36,7 +41,9 @@ export default class GlobalLayout extends Component {
 		      <GlobalContent />
 		      <GlobalFooter />
 		    </Layout>
+		    {/*renderRoutes(this.props.route.routes)*/}
 			</Layout>
     )
   }
 }
+export default withRouter(GlobalLayout)

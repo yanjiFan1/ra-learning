@@ -7,8 +7,7 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 const { Content } = Layout
 import Routes from '../../../routes/index'
-console.log(Routes)
-console.log(<Routes />)
+
 export default class GlobalContent extends Component {
 	render() {
     return (

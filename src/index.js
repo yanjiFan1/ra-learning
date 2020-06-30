@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import './index.css';
 import App from './App';
@@ -9,7 +10,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 ReactDOM.render(
 	<ConfigProvider>
-  	<App />
+  	<HashRouter>
+  		<App />
+  	</HashRouter>
   </ConfigProvider>,
   document.getElementById('root')
 );

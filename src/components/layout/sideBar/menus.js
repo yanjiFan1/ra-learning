@@ -10,8 +10,7 @@ export const menus = [{
 	path: '/dashboard',
 	name: '首页',
   icon: 'icon-home',
-  sub:[],
-  prarentId:'1'
+  sub:[]
 },
 {
   id:'2',
