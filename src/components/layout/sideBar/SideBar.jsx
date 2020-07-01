@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { menus } from './menus.js';
+import { sliderMenu } from '../../../routes/index'
 import SiderMenu from './components/SiderMenu';
 import {
   MenuUnfoldOutlined,
@@ -20,7 +20,7 @@ const { Sider } = Layout;
 class GlobalSideBar extends Component {
 	constructor(props){
     super(props);
-    this.menus = menus
+    this.menus = sliderMenu
   }
 
   state = {
@@ -70,6 +70,7 @@ class GlobalSideBar extends Component {
   }
 
   menuClick = e => {
+    console.log(e)
     this.setState({
       selectedKey: e.key
     })
@@ -98,7 +99,7 @@ class GlobalSideBar extends Component {
         <SiderMenu
           menus={ this.menus }
           onClick={this.menuClick}
-          theme="light"
+          theme="dark"
           mode="inline"
           selectedKeys={[this.state.selectedKey]}
           openKeys={this.state.firstHide ? null : [this.state.openKey]}

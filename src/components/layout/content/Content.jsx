@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter, HashRouter, Redirect, Switch } from 'react-router-dom'
 import { matchRoutes, renderRoutes } from "../../../routes/react-router-config/index.js";
-import routes from '../../../routes/index'
+import { routes } from '../../../routes/index'
 import { Layout } from 'antd';
 const { Content } = Layout
 

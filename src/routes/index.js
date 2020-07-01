@@ -7,55 +7,70 @@ import Home from '../view/home/Home'
 import Shop from '../view/shop/Shop'
 import SecondRoute from '../view/common/SecondRoute' // 公共模块-二级路由
 
-const routes = [
+// 公共模块（菜单栏）
+const common = [
+  {
+    path: "/dashboard",
+    name: '首页',
+    exact: true,
+    component: Dashboard
+  },
+  {
+    path: "/auth",
+    name: '权限管理',
+    component: SecondRoute,
+    routes: [
+      {
+        path: "/auth/menu",
+        name: '角色管理',
+        component: Menu
+      },
+      {
+        path: "/auth/role",
+        name: '菜单管理',
+        component: Role
+      },
+      {
+        path: "/auth/user",
+        name: '用户管理',
+        component: User
+      }
+    ] 
+  },
+  {
+    path: "/home",
+    name: '首页',
+    exact: true,
+    component: Home
+  },
+  {
+    path: "/shop",
+    name: '商铺',
+    exact: true,
+    component: Shop
+  }
+]
+
+
+
+// 页面路由
+export const routes = [
   {
     component: Login,
     routes: [
       {
-        path: "/",
-        exact: true,
-        component: Login
+      path: "/",
+      exact: true,
+      component: Login
       },
       {
         path: "/login",
         exact: true,
         component: Login
-      },
-      {
-        path: "/dashboard",
-        exact: true,
-        component: Dashboard
-      },
-      {
-        path: "/auth",
-        component: SecondRoute,
-        routes: [
-          {
-            path: "/auth/menu",
-            component: Menu
-          },
-          {
-            path: "/auth/role",
-            component: Role
-          },
-          {
-            path: "/auth/user",
-            component: User
-          }
-        ]
-      },
-      {
-        path: "/home",
-        exact: true,
-        component: Home
-      },
-      {
-        path: "/shop",
-        exact: true,
-        component: Shop
       }
-    ]
-  }
+    ].concat(common)
+  }  
 ];
 
-export default routes;
+// 页面侧边栏菜单
+export const sliderMenu = common

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+
 import { Button } from 'antd';
 import logo from './logo.svg';
 import dayjs from 'dayjs'
@@ -17,7 +17,7 @@ function App() {
   // console.log(dateValue1)
   return (
     <div className="App">
-      <HashRouter><Layout /></HashRouter>
+      <Layout />
     </div>
   );
 }

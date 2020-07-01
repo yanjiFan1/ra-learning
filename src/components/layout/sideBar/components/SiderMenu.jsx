@@ -8,11 +8,10 @@ const iconStyle={
 }
 
 const renderMenuItem =
-  ({ id, name, frontIcon, fronType, path, ...props })=> {
+  ({ name, frontIcon, path })=> {
     return (
       <Menu.Item
         key={path}
-        {...props}
       >
         <Link to={path}>
           { frontIcon && <i className={`icon iconfont ${frontIcon}` } style={iconStyle} />}
@@ -23,7 +22,7 @@ const renderMenuItem =
   }
 
 const renderSubMenu =
-  ({ id, name, frontIcon, fronType, path, sub, ...props }) =>{
+  ({ name, frontIcon, path, routes }) =>{
     return (
       <Menu.SubMenu
         key={path}
@@ -33,9 +32,8 @@ const renderSubMenu =
             <span className="nav-text f-usn">{name}</span>
           </span>
         }
-        {...props}
       >
-      {sub && sub
+      {routes && routes
           .map(item => renderMenuItem(item))}
       </Menu.SubMenu>
     )
@@ -47,7 +45,7 @@ export default ({ menus, ...props }) => {
         <Menu {...props}>
           {menus && menus
           .filter(item=>item.fronType!= 'module')
-          .map(item => item.sub && item.sub.length? renderSubMenu(item) : renderMenuItem(item))}
+          .map(item => item.routes && item.routes.length? renderSubMenu(item) : renderMenuItem(item))}
         </Menu>
     )
 }

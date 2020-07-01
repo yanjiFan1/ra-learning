@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
 import GlobalHeader from './header/Header'
+import Breadcrumb from '../breadcrumb/Breadcrumb'
 import GlobalFooter from './footer/Footer'
 import GlobalContent from './content/Content'
 import GlobalSideBar from './sideBar/SideBar'
@@ -16,7 +17,7 @@ class GlobalLayout extends Component {
 	constructor(props){
     super(props)
   }
-  
+
 	state = {
 		collapsed: 0
 	}
@@ -30,11 +31,13 @@ class GlobalLayout extends Component {
 
 	render() {
 		const { collapsed } = this.state
+		console.log(this.props)
     return (
       <Layout className="g-layout">
 		    <GlobalSideBar collapsed={collapsed} />
 				<Layout className="site-layout">
 		      <GlobalHeader collapsed={collapsed} onSwitchCollapsed={this.onSwitchCollapsed} />
+		      <Breadcrumb first={1} second={2} third={3} textDescription={123} />
 		      <GlobalContent />
 		      <GlobalFooter />
 		    </Layout>
