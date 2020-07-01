@@ -4,9 +4,12 @@
  * @Date: 2020/6/16
 */
 import React, { Component } from 'react';
+import { Route, BrowserRouter, HashRouter, Redirect, Switch } from 'react-router-dom'
+import { matchRoutes, renderRoutes } from "../../../routes/react-router-config/index.js";
+import routes from '../../../routes/index'
 import { Layout } from 'antd';
 const { Content } = Layout
-import Routes from '../../../routes/index'
+
 
 export default class GlobalContent extends Component {
 	render() {
@@ -20,7 +23,7 @@ export default class GlobalContent extends Component {
         }}
       >
        	<div className="site-layout-background">
-          <Routes />
+          {renderRoutes(routes)}
         </div>
       </Content>
     )

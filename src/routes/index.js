@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-// import { Switch, Route, Router, Redirect } from 'react-router'
 import Login from '../view/login/Login'
 import Dashboard from '../view/dashboard/Dashboard'
 import Menu from '../view/auth/menu/Menu' // 权限管理-菜单管理
@@ -9,56 +7,6 @@ import Home from '../view/home/Home'
 import Shop from '../view/shop/Shop'
 import SecondRoute from '../view/common/SecondRoute' // 公共模块-二级路由
 
-// const Dashboard = React.createClass({
-//   render() {
-//     return <div>Welcome to the Dashboard!</div>
-//   }
-// })
-
-// const About = React.createClass({
-//   render() {
-//     return <div>Welcome to the About!</div>
-//   }
-// })
-
-// const Inbox = React.createClass({
-//   render() {
-//     return <div>Welcome to the Inbox!</div>
-//   }
-// })
-
-// const Message = React.createClass({
-//   render() {
-//     return <div>Welcome to the Message!</div>
-//   }
-// })
-
-// const routeConfig = [
-//   { 
-//   	path: '/',
-//     component: Login,
-//     indexRoute: { component: Dashboard },
-//     childRoutes: [
-//       { path: 'about', component: About },
-//       { path: 'inbox',
-//         component: Inbox,
-//         childRoutes: [
-//           { path: '/messages/:id', component: Message },
-//           { path: 'messages/:id',
-//             onEnter: function (nextState, replaceState) {
-//               replaceState(null, '/messages/' + nextState.params.id)
-//             }
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ]
-
-// export default <Router routes={routeConfig} />
-
-import { Route, BrowserRouter, HashRouter, Redirect, Switch } from 'react-router-dom'
-import { matchRoutes, renderRoutes } from "./react-router-config/index.js";
 const routes = [
   {
     component: Login,
@@ -95,7 +43,6 @@ const routes = [
             component: User
           }
         ]
-        
       },
       {
         path: "/home",
@@ -111,16 +58,4 @@ const routes = [
   }
 ];
 
-class ARouter extends Component {
-  render() {
-    return(
-      <div>
-        {renderRoutes(routes)}
-        {/*renderRoutes(routes[0].routes)*/}
-        {/*renderRoutes((routes[0].routes && routes[0].routes.routes))*/}
-      </div>
-    )
-  }
-}
-
-export default ARouter;
+export default routes;
