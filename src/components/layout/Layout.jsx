@@ -6,9 +6,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
-import Routes from '../../routes/index'
-import { renderRoutes } from "../../routes/react-router-config/index.js";
-
 import GlobalHeader from './header/Header'
 import GlobalFooter from './footer/Footer'
 import GlobalContent from './content/Content'
@@ -41,7 +38,6 @@ class GlobalLayout extends Component {
 		      <GlobalContent />
 		      <GlobalFooter />
 		    </Layout>
-		    {/*renderRoutes(this.props.route.routes)*/}
 			</Layout>
     )
   }

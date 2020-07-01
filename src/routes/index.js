@@ -7,7 +7,7 @@ import Role from '../view/auth/role/Role' // 权限管理-角色管理
 import User from '../view/auth/user/User' // 权限管理-用户管理
 import Home from '../view/home/Home'
 import Shop from '../view/shop/Shop'
-import Layout from '../components/layout/Layout' // 公共模块
+import SecondRoute from '../view/common/SecondRoute' // 公共模块-二级路由
 
 // const Dashboard = React.createClass({
 //   render() {
@@ -80,7 +80,7 @@ const routes = [
       },
       {
         path: "/auth",
-        component: Login,
+        component: SecondRoute,
         routes: [
           {
             path: "/auth/menu",
@@ -116,8 +116,8 @@ class ARouter extends Component {
     return(
       <div>
         {renderRoutes(routes)}
-        {renderRoutes(routes[0].routes)}
-        {renderRoutes((routes[0].routes && routes[0].routes.routes))}
+        {/*renderRoutes(routes[0].routes)*/}
+        {/*renderRoutes((routes[0].routes && routes[0].routes.routes))*/}
       </div>
     )
   }
