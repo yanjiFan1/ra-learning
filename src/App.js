@@ -8,7 +8,7 @@ import './assets/style/index.less'
 import Routes from './routes/index';
 import Layout from './components/layout/Layout'
 
-function App() {
+function App(props) {
   // let date = new Date()
   // let dateValue = date.valueOf(date)
   // let dateValue1 = date.getTime(date)

@@ -10,41 +10,44 @@ import SecondRoute from '../view/common/SecondRoute' // 公共模块-二级路�
 // 公共模块（菜单栏）
 const common = [
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     name: '首页',
     exact: true,
     component: Dashboard
   },
   {
-    path: "/auth",
+    path: "/admin/auth",
     name: '权限管理',
     component: SecondRoute,
     routes: [
       {
-        path: "/auth/menu",
+        path: "/admin/auth/menu",
         name: '角色管理',
+        exact: true,
         component: Menu
       },
       {
-        path: "/auth/role",
+        path: "/admin/auth/role",
         name: '菜单管理',
+        exact: true,
         component: Role
       },
       {
-        path: "/auth/user",
+        path: "/admin/auth/user",
         name: '用户管理',
+        exact: true,
         component: User
       }
     ] 
   },
   {
-    path: "/home",
+    path: "/admin/home",
     name: '首页',
     exact: true,
     component: Home
   },
   {
-    path: "/shop",
+    path: "/admin/shop",
     name: '商铺',
     exact: true,
     component: Shop
@@ -56,19 +59,18 @@ const common = [
 // 页面路由
 export const routes = [
   {
-    component: Login,
+    component: SecondRoute,
     routes: [
-      {
+    {
       path: "/",
       exact: true,
       component: Login
-      },
-      {
-        path: "/login",
-        exact: true,
-        component: Login
-      }
-    ].concat(common)
+    },
+    {
+      path: "/login",
+      exact: true,
+      component: Login
+    }].concat(common)
   }  
 ];
 
