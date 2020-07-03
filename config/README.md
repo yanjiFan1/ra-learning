@@ -112,6 +112,17 @@ babel-plugin-transform-class-properties
 
 https://www.jianshu.com/p/ce28ceddda72
 
+15. mini-css-extract-plugin 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件，支持按需加载css和sourceMap
+
+MiniCssExtractPlugin 参考： https://www.jianshu.com/p/91e60af11cc9
+
+只能用在webpack4中，对比另一个插件 extract-text-webpack-plugin有点:
+
+异步加载
+不重复编译，性能更好
+更容易使用
+只针对CSS
+目前缺失功能，HMR。
 
 
 
@@ -130,3 +141,51 @@ https://www.jianshu.com/p/ce28ceddda72
 npm i babel-loader babel-core babel-preset-env babel-preset-react --save-dev
 
 2. 警告入口点大小限制：以下入口点的组合资产大小超过了建议的限制（244 KiB）。 这可能会影响网络性能。
+
+3. webpack踩坑系列之less-loader6.0.0的javascriptEnabled报错解决
+参考： https://blog.csdn.net/wen81643956/article/details/105863548/
+
+{
+   loader: 'less-loader', 
+   options: {
+     javascriptEnabled: true 
+   }
+}
+
+4. Error: options/query cannot be used with loaders (use options for each array item
+
+options和loaders数组不能同时使用
+
+参考 https://blog.csdn.net/liwenfei123/article/details/80389464
+
+错误写法：
+{
+        test: /\.(css|less)$/,
+        loaders:['style-loader', 'css-loader', 'less-loader'],
+        options: {
+          lessOptions: {
+            javascriptEnabled: true
+          } 
+        }
+        // exclude: /node_modules/,
+        // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
+      },
+
+正确写法:
+{
+  test: /\.(css|less)$/,
+  use:[
+    { loader: "eslint-loader" },
+    { loader: "css-loader" },
+    {
+      loader:"less-loader",
+      options:{//options、query不能和loader数组一起使用
+        lessOptions: {
+          javascriptEnabled: true
+        } 
+      },
+    }
+  ],
+  exclude: /node_modules/
+  // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
+},

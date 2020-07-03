@@ -1,6 +1,8 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
@@ -19,7 +21,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       inject: true
-    })
+    }),
+    new MiniCssExtractPlugin({
+      // 类似 webpackOptions.output里面的配置 可以忽略
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
   module: {
     rules: [
@@ -30,7 +37,8 @@ module.exports = {
         use: {
           loader: 'babel-loader', // 'babel-loader' is also a legal name to reference  
           options: {  
-            presets: ["@babel/preset-env"]   // 转换规则
+            presets: ["@babel/preset-env"],   // 转换规则
+            cacheDirectory: true//利用缓存，提高性能，babel is slow
           }
         }
       },
@@ -67,20 +75,44 @@ module.exports = {
       //   ]
       // },
       {
-        test: /\.(css|less)$/,
-        loaders:['style-loader', 'css-loader', 'less-loader']
-        // exclude: /node_modules/,
+        test: /\.(css)$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(less)$/,
+        use:[
+          // MiniCssExtractPlugin.loader,
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "less-loader",
+            options:{ //options、query不能和loader数组一起使用
+              lessOptions: {
+                javascriptEnabled: true
+              } 
+            },
+          }
+        ],
+        exclude: /node_modules/
         // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         exclude: /node_modules/,
         include: [resolve('../src')],
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: 'img/[name].[hash:4].[ext]'
-        }
+        use:[
+          { 
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+              name: 'img/[name].[hash:4].[ext]'
+            }
+          },
+          { loader: "file-loader" }
+        ]
       },
       {
         test: /\.(woff|eot|ttf|svg|gif)$/,
@@ -94,7 +126,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.jsx', '.js', '.json'],
     alias: {
       // '@': path.join(__dirname, '../src'),
     },

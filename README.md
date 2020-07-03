@@ -85,3 +85,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 1. craco
 2. webpack 目前是这个
+
+
+### 遇到的问题
+
+1. antd 自定义主题功能使用报错 .bezierEasingMixin(); ^ Inline JavaScript is not enabled. Is it set in your options
+解决方案： https://blog.csdn.net/m0_37148591/article/details/94611292
