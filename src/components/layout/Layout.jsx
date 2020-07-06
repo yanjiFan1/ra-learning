@@ -31,7 +31,7 @@ class GlobalLayout extends Component {
 
 	render() {
 		const { collapsed } = this.state
-		console.log(this.props)
+		console.log('layoutstart' + this.props + 'layoutend')
     return (
       <Layout className="g-layout">
 		    <GlobalSideBar collapsed={collapsed} />

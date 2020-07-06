@@ -129,9 +129,10 @@ MiniCssExtractPlugin 参考： https://www.jianshu.com/p/91e60af11cc9
 #### 重要优化模块 #####
 1. webpack4 的热加载 https://www.jianshu.com/p/893058b6b17f
 
-2. react-hot-loader 
+2. react-hot-loader  使用Webpack配置React项目中的热更新
 	2.1 https://www.jianshu.com/p/244e1ffe7501
 	2.2 https://blog.csdn.net/csm0912/article/details/87069764
+	2.3 https://www.jianshu.com/p/dda3c7940b92
 
 
 
@@ -160,16 +161,16 @@ options和loaders数组不能同时使用
 
 错误写法：
 {
-        test: /\.(css|less)$/,
-        loaders:['style-loader', 'css-loader', 'less-loader'],
-        options: {
-          lessOptions: {
-            javascriptEnabled: true
-          } 
-        }
-        // exclude: /node_modules/,
-        // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
-      },
+  test: /\.(css|less)$/,
+  loaders:['style-loader', 'css-loader', 'less-loader'],
+  options: {
+    lessOptions: {
+      javascriptEnabled: true
+    } 
+  }
+  // exclude: /node_modules/,
+  // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
+},
 
 正确写法:
 {
@@ -189,3 +190,9 @@ options和loaders数组不能同时使用
   exclude: /node_modules/
   // loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
 },
+
+5. webpack热加载控制台报错"Uncaught Error: [HMR] Hot Module Replacement is disabled."的解决办法
+解决方案:
+在执行webpack-dev-server命令时加上 --hot --inline命令即可
+
+参考： https://blog.csdn.net/springlover1994/article/details/80973910

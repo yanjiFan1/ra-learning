@@ -12,6 +12,9 @@ class BreadcrumbCustom extends React.Component {
     const third = <Breadcrumb.Item>{this.props.third}</Breadcrumb.Item>;
     const four = <Breadcrumb.Item>{this.props.four}</Breadcrumb.Item>;
     const textDescription = this.props.textDescription;
+    console.log('Breadcrumbstart')
+    console.log(this.props)
+    console.log('Breadcrumbend')
     return (
       <div style={{position:'relative'}}>
         <Breadcrumb style={{ margin: '12px 0' }} separator=">">

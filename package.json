@@ -13,7 +13,7 @@
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --config config/webpack.dev.js",
+    "start": "webpack-dev-server --open --config config/webpack.dev.js --inline --hot --progress",
     "build": "webpack --config config/webpack.prod.js",
     "build1": "webpack --mode production",
     "webpack": "webpack --config --progress --color config/webpack.dev.js"
@@ -49,6 +49,7 @@
     "less-loader": "^6.1.1",
     "mini-css-extract-plugin": "^0.9.0",
     "path": "^0.12.7",
+    "react-hot-loader": "^4.12.21",
     "style-loader": "^1.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
