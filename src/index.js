@@ -5,7 +5,6 @@ import { HashRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import './index.css';
 import Page from './page';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 if (process.env.NODE_ENV !== 'production') {
   console.log('Looks like we are in development mode!');
@@ -24,11 +23,22 @@ const render = Component => {   // 增加react-hot-loader保持状态刷新操�
   );
 };
 
-// render(App);
 render(Page);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
+	// 隐藏You cannot change <Router routes>; it will be ignored 错误提示
+  // react-hot-loader 使用在react-router 3.x上引起的提示，react-router 4.x不存在
+  // 详情可参照https://github.com/gaearon/react-hot-loader/issues/298
+  const orgError = console.error; // eslint-disable-line no-console
+  console.error = (...args) => { // eslint-disable-line no-console
+      if (args && args.length === 1 && typeof args[0] === 'string' && args[0].indexOf('You cannot change <Router routes>;') > -1) {
+          // React route changed
+      } else {
+          // Log the error as normally
+          orgError.apply(console, args);
+      }
+  };
   module.hot.accept('./page', () => {
     render(Page);
   })
