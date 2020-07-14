@@ -2,6 +2,7 @@
   "name": "ra-learning",
   "version": "0.1.0",
   "private": true,
+  "rootPath": ".",
   "dependencies": {
     "ant-design-pro": "^2.3.2",
     "antd": "^4.3.3",
@@ -52,6 +53,7 @@
     "react-hot-loader": "^4.12.21",
     "style-loader": "^1.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
+    "url": "^0.11.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",

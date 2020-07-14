@@ -2,11 +2,12 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const paths = require('./paths')
 
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
-console.log(path.join(__dirname + '/dist'))
+
 module.exports = {
   // entry: {
   //   app: './src/index.js'
@@ -126,7 +127,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(woff|eot|ttf|svg|gif)$/,
+        test: /\.(woff|eot|ttf|svg|gif|ico)$/,
         exclude: /node_modules/,
         loader: 'url-loader',
         options: {
@@ -139,7 +140,12 @@ module.exports = {
   resolve: {
     extensions: ['.jsx', '.js', '.json'],
     alias: {
-      // '@': path.join(__dirname, '../src'),
+      '@': path.join(__dirname, '../src'),
     },
   },
+  node: {
+    fs: 'empty',
+    net:'empty',
+    tls:"empty"
+   }
 };

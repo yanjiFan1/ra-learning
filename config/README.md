@@ -196,3 +196,13 @@ options和loaders数组不能同时使用
 在执行webpack-dev-server命令时加上 --hot --inline命令即可
 
 参考： https://blog.csdn.net/springlover1994/article/details/80973910
+
+6. fs模块下载了但是还是找不到模块
+
+解决方案：
+	在webpack中添加：
+	node: {
+    fs: 'empty',
+    net:'empty',
+    tls:"empty"
+   }
