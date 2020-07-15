@@ -31,6 +31,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      title: '烟祭个人项目',
       template: './public/index.html',
       inject: true
     }),

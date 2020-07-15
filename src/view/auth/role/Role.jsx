@@ -10,6 +10,7 @@ export default class Role extends React.Component {
 	render() {
     return (
       <div>
+      	Role
       	// {renderRoutes(this.props.route.routes)}
       </div>
     )

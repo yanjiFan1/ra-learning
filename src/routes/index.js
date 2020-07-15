@@ -21,16 +21,16 @@ const common = [
     component: SecondRoute,
     routes: [
       {
-        path: "/admin/auth/menu",
+        path: "/admin/auth/role",
         name: '角色管理',
         exact: true,
-        component: Menu
+        component: Role
       },
       {
-        path: "/admin/auth/role",
+        path: "/admin/auth/menu",
         name: '菜单管理',
         exact: true,
-        component: Role
+        component: Menu
       },
       {
         path: "/admin/auth/user",

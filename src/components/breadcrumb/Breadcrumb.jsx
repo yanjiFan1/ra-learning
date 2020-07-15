@@ -4,6 +4,7 @@
 import React from 'react';
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
+import './breadcrumb.less'
 
 class BreadcrumbCustom extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class BreadcrumbCustom extends React.Component {
     console.log(this.props)
     console.log('Breadcrumbend')
     return (
-      <div style={{position:'relative'}}>
+      <div className="m-breadcrumb" style={{position:'relative'}}>
         <Breadcrumb style={{ margin: '12px 0' }} separator=">">
           <Breadcrumb.Item><Link to={'/'}>首页</Link></Breadcrumb.Item>
             {first}
