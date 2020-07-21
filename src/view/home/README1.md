@@ -8,20 +8,20 @@
         <div class="u-game-box">
           <div v-if="isAnimation1" class="u-game-box-pic1" :class="isAnimation1 && !isShowText ? 'active': ''" :id='where1'></div>
           <div v-if="!isAnimation1" class="u-game-box-pic1"></div>
-          <div v-if="isShowText" class="mb-5">₹2000</div>
-          <div v-if="isShowText">EXEMPTION LOAN</div>
+          <div v-if="isShowText" class="mb-5">{{firstAmout}}</div>
+          <div v-if="isShowText">{{firstText}}</div>
         </div>
         <div class="u-game-box">
           <div v-if="isAnimation2" class="u-game-box-pic2" :class="isAnimation2 && !isShowText ? 'active': ''" :id="where2"></div>
           <div v-if="!isAnimation2" class="u-game-box-pic2"></div>
-          <div v-if="isShowText" class="mb-5">₹300</div>
-          <div v-if="isShowText">SUPERCOINS</div>
+          <div v-if="isShowText" class="mb-5">{{secondAmout}}</div>
+          <div v-if="isShowText">{{secondText}}</div>
         </div>
         <div class="u-game-box">
           <div v-if="isAnimation3" class="u-game-box-pic3" :class="isAnimation3 && !isShowText ? 'active': ''" :id="where3"></div>
           <div v-if="!isAnimation3" class="u-game-box-pic3"></div>
-          <div v-if="isShowText" class="mb-5">₹500</div>
-          <div v-if="isShowText">SUPERCOINS</div>
+          <div v-if="isShowText" class="mb-5">{{thirdAmout}}</div>
+          <div v-if="isShowText">{{thirdText}}</div>
         </div>
       </div>
       <div class="m-game-btn" @click="onStartGame"></div>
@@ -31,13 +31,19 @@
         <vue-seamless-scroll :data="listData" :class-option="optionSingleHeight" class="seamless-warp">
           <div v-for="(item,index) in listData" :key="index" class="u-award-item flex flexBetween">
             <div>{{item.phone}}</div>
-            <div>{{item.amount}}</div>
+            <div>{{item.prize}}</div>
           </div>
         </vue-seamless-scroll>
       </div>
     </div>
-    <div class="m-banner"></div>
-    <WinningModal :visible="visible.winning" :winningModalType="winningModalType" @onClose="onClose"/>
+    <div class="m-banner">
+      <van-swipe class="u-invite-swiper" :autoplay="3000" :show-indicators="false">
+        <van-swipe-item v-for="(item, index) in detailList" :key="index">
+          <img @click="() => onJump(item.detailLinkirl)" :src="item.detailImg" alt="no images">
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    <WinningModal :visible="visible.winning" :winningModalType="winningModalType" :lotteryData="lotteryData" @onClose="onClose"/>
     <RuleModal :visible="visible.rule" @onClose="onClose"/>
   </div>
 </template>
@@ -60,7 +66,7 @@ export default {
       isAnimation2: false, // isAnimation2是否开始动画
       isAnimation3: false, // isAnimation3是否开始动画
       visible: {
-      	winning: true, // 游戏结果弹框
+        winning: false, // 游戏结果弹框
         rule: false // 游戏规则弹框
       },
       winningModalType: 1, // 开奖弹框状态
@@ -83,7 +89,20 @@ export default {
       }, {
         phone: '***4049',
         amount: '₹2000 Examption Loan'
-      }]
+      }],
+      lotteryData: {}, // 抽奖结果数据
+      randomNums: [], // 中奖对应的数组
+      amount: 0,
+      activityNo: '',
+      enough: false, // 是否余额不足
+      lottery: false, // 是否中奖
+      detailList: [], // banner列表
+      firstAmout: '₹2000', // 第一列中奖对应的金额
+      firstText: 'EXEMPTION LOAN', // 第一列中奖对应的文案
+      secondAmout: '₹500', // 第二列中奖对应的金额
+      secondText: 'SUPERCOINS', // 第二列中奖对应的文案
+      thirdAmout: '₹300', // 第三列中奖对应的金额
+      thirdText: 'SUPERCOINS' // 第三列中奖对应的文案
     }
   },
   computed: {
@@ -95,63 +114,95 @@ export default {
     }
   },
   mounted () {
+    this.getLotteryActivity()
   },
   methods: {
 
-  	// 弹框的回调函数
-  	onClose (type, bool) {
-  		this.visible[type] = bool
-  	},
+    // 获取抽奖页面的信息
+    getLotteryActivity () {
+      this.$api['lottery/getLotteryActivity']({
+
+      }, {
+        noShowLoading: true,
+        noShowDefaultError: false
+      }).then(res => {
+        this.amount = res.activityConsumeGold
+        this.activityNo = res.activityNo
+        this.listData = res.winList
+        this.detailList = res.reportBanner && res.reportBanner.detailList
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    // 弹框的回调函数
+    onClose (type, bool) {
+      this.visible[type] = bool
+    },
 
     // 点击游戏规则
     onRule () {
       this.onClose('rule', true)
     },
 
-    // 开始抽奖
-    onStartGame () {
+    // 处理中奖文案
+    onHandleResultText (randomNums) {
+      switch (randomNums[0]) {
+        case 1:
+          this.firstAmout = '₹500'
+          this.firstText = 'SUPERCOINS'
+          break
+        case 2:
+          this.firstAmout = '₹2000'
+          this.firstText = 'EXEMPTION LOAN'
+          break
+        case 3:
+          this.firstAmout = '₹300'
+          this.firstText = 'SUPERCOINS'
+          break
+      }
+      switch (randomNums[1]) {
+        case 1:
+          this.secondAmout = '₹300'
+          this.secondText = 'SUPERCOINS'
+          break
+        case 2:
+          this.secondAmout = '₹500'
+          this.secondText = 'SUPERCOINS'
+          break
+        case 3:
+          this.secondAmout = '₹2000'
+          this.secondText = 'EXEMPTION LOAN'
+          break
+      }
+      switch (randomNums[2]) {
+        case 1:
+          this.thirdAmout = '₹2000'
+          this.thirdText = 'EXEMPTION LOAN'
+          break
+        case 2:
+          this.thirdAmout = '₹300'
+          this.thirdText = 'SUPERCOINS'
+          break
+        case 3:
+          this.thirdAmout = '₹500'
+          this.thirdText = 'SUPERCOINS'
+          break
+      }
+    },
+
+    // 游戏规则
+    gameRule (randomNums, res) {
       if (this.isAnimation1 && this.isAnimation2 && this.isAnimation3) {
         this.isAnimation1 = false
         this.isAnimation2 = false
         this.isAnimation3 = false
       }
 
-      // const prizeArr = [
-      //   [1, 1, 1], //  500  300  2000
-      //   [1, 1, 2], //  500  300  300
-      //   [1, 1, 3], //  500  300  500
-      //   [1, 2, 1], //  500  500  2000
-      //   [1, 2, 2], //  500  500  300
-      //   [1, 2, 3], //  500  500  500
-      //   [1, 3, 1], //  500  2000  2000
-      //   [1, 3, 2], //  500  2000  300
-      //   [1, 3, 3], //  500  2000  500
-      //   [2, 1, 1], //  2000 300  2000
-      //   [2, 1, 2], //  2000 300  300
-      //   [2, 1, 3], //  2000 300  500
-      //   [2, 2, 1], //  2000 500  2000
-      //   [2, 2, 2], //  2000 500  300
-      //   [2, 2, 3], //  2000 500  500
-      //   [2, 3, 1], //  2000 2000 2000
-      //   [2, 3, 2], //  2000 2000 300
-      //   [2, 3, 3], //  2000 2000 500
-      //   [3, 1, 1], //  300  300  2000
-      //   [3, 1, 2], //  300  300  300
-      //   [3, 1, 3], //  300  300  500
-      //   [3, 2, 1], //  300  500  2000
-      //   [3, 2, 2], //  300  500  300
-      //   [3, 2, 3], //  300  500  500
-      //   [3, 3, 1], //  300  2000  2000
-      //   [3, 3, 2], //  300  2000  300
-      //   [3, 3, 3] //  300  2000  500
-      // ]
-
-      // prizeArr[6].map((item, index) => {
-      //   this.where[index + 1] = 'frameAnimImg' + item[index]
-      // })
-      this.where1 = 'frameAnimImg1'
-      this.where2 = 'frameAnimImg2'
-      this.where3 = 'frameAnimImg2'
+      this.where1 = 'frameAnimImg' + randomNums[0]
+      this.where2 = 'frameAnimImg' + randomNums[1]
+      this.where3 = 'frameAnimImg' + randomNums[2]
+      this.onHandleResultText(randomNums)
       this.isShowText = false
       setTimeout(() => {
         this.isAnimation1 = true
@@ -168,9 +219,13 @@ export default {
         // this.isAnimation3 = false
         this.isShowText = true
       }, 2100)
+      setTimeout(() => {
+        this.onHandleResult(res) // 处理结果
+      }, 3100)
       // setTimeout(() => {
       //   this.isAnimation1 = false
       //   this.isAnimation2 = false
+
       //   this.isAnimation3 = false
       // },1500)
       // setTimeout(() => {
@@ -182,6 +237,49 @@ export default {
       // setTimeout(() => {
       //   this.isAnimation3 = false
       // },6000)
+    },
+
+    // 处理抽奖结果
+    onHandleResult (res) {
+      if (!res.enough) {
+        this.winningModalType = 3
+      } else {
+        if (res.lottery) {
+          this.winningModalType = 1
+        } else {
+          this.winningModalType = 2
+        }
+      }
+      this.onClose('winning', true)
+    },
+
+    // 开始抽奖
+    onStartGame () {
+      this.$api['lottery/getLottery']({
+        activityNo: this.activityNo,
+        amount: this.amount
+      }, {
+        noShowLoading: true,
+        noShowDefaultError: false
+      }).then(res => {
+        this.lotteryData = res
+        this.lottery = res.lottery // 是否中奖：true 为中奖
+        this.randomNums = res.randomNums // 老虎机中奖返回数组
+        this.awardImg = res.awardImg // 中奖图片
+        this.enough = res.enough // 是否余额不足
+        if (!this.enough) {
+          this.onHandleResult(res)
+        } else {
+          this.gameRule(res.randomNums, res)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    // banner跳转
+    onJump (url) {
+      location.href = url
     }
   }
 }
@@ -191,7 +289,7 @@ export default {
 .g-lottery {
   position: relative;
   width: 750px;
-	height: 1930px; // 1842
+  height: 1930px; // 1842
   // background: linear-gradient(90deg,rgba(41,40,123,1),rgba(47,61,171,1),rgba(79,59,207,1),rgba(88,41,173,1));
   background: url(~@/assets/imgs/lottery/BG@2x.png) no-repeat center center;
   background-size: 100% 100%;
@@ -308,8 +406,16 @@ export default {
     width: 690px;
     height: 165px;
     margin: 37px auto 0;
-    background: url(~@/assets/imgs/lottery/banner@2x.png) no-repeat center center;
-    background-size: 100% 100%;
+    // background: url(~@/assets/imgs/lottery/banner@2x.png) no-repeat center center;
+    // background-size: 100% 100%;
+    .u-invite-swiper {
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
   @keyframes frameAnim1 {
